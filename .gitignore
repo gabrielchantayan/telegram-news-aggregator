@@ -1,8 +1,9 @@
 telegram-info.txt
+config.ts
 
 # dependencies
-news-agg-web/node_modules
-news-agg-web/.pnp
+*/node_modules
+*/.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
