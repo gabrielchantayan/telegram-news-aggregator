@@ -7,6 +7,7 @@ export const news_item_prompt = `You are an automated OSINT news processor. Give
   "original_language"?: string,         // the name of the language in plain English
   "tags": [ string, ... ],             // exactly 3–5 tags; if about a war, that war must be first
   "region": [ string, ... ]            // 1–5 strings specifying geographic regions, from broad to specific
+  "notes"?: string                     // any additional notes
 }
 
 Rules:
@@ -70,7 +71,30 @@ Rules:
       - "Air defense systems in Tehran and Isfahan have been activated."
       - "✅ Urgent | Recording of Isaac Herzog (President of the Zionist regime) fleeing to a shelter."
      
-     `;
+7. **Additional Considerations**
+   - Some channels use politicized or euphemistic terminology that may confuse readers. To ensure clarity and neutrality, apply the following replacements in the "text" field when necessary:
+      - Replace "IOF" with "IDF".
+      - Replace "Occupied Palestine" or "Occupied Territories" with "Israel".
+      - Replace "Zionist entity" or "Zionist regime" with "Israel".
+      - Replace "Great Satan" (if clearly referring to the United States) with "United States".
+      - Replace "Little Satan" (if clearly referring to Israel) with "Israel".
+      - Remove excessive epithets or propaganda-style adjectives that do not contribute factual meaning (e.g., "the bloodthirsty regime of...").
+
+   - You **must not alter factual content**, even if it is controversial or sensitive.
+   - Minor spelling corrections (e.g., "Isreal" to "Israel"), grammar fixes, or typographical corrections **do not require the "notes" field**.
+   - You must preserve the original intended meaning and factual claims — do not soften or censor actionable intelligence.
+   
+   - If you apply any of the above replacements or removals for clarity, you **must include the "notes" field** in the output JSON with this format:
+      "notes": "This message has been edited by the news aggregator bot for clarity: [description of changes made]."
+   
+   - **Example**:
+      "notes": "This message has been edited by the news aggregator bot for clarity: 'IOF' replaced with 'IDF'; 'Zionist regime' replaced with 'Israel'."
+
+   - Do **not** include the "notes" field if:
+      - Only spelling, typo, or minor grammar corrections were made.
+      - Only formatting clean-up (e.g., removing extra line breaks, Telegram handles) was performed.
+
+`;
 
 export const hourly_report_prompt = `You work as a reporter at an OSINT News Aggregator. Every hour you are given a list of news items, and you are to write a structured summary report of them.
 

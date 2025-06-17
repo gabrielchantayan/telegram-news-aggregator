@@ -13,6 +13,7 @@ interface NewsItem {
 	timestamp: number;
 	media?: string[];
 	region?: string[];
+	notes?: string
 }
 
 interface InfiniteNewsProps {
@@ -85,6 +86,7 @@ const InfiniteNews: React.FC<InfiniteNewsProps> = ({ initialNews }) => {
 					timestamp={n.timestamp}
 					media={n.media}
 					region={n.region}
+					notes={n.notes}
 				/>
 			))}
 			{loading && <div className='text-center'>Loading...</div>}

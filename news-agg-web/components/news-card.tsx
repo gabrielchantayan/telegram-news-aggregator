@@ -26,6 +26,7 @@ const NewsCard = ({
 	timestamp,
 	media,
 	region,
+	notes
 }: {
 	source: string;
 	title?: string;
@@ -36,6 +37,7 @@ const NewsCard = ({
 	timestamp: number;
 	media?: string[];
 	region?: string[];
+	notes?: string
 }) => {
 	const [showing_translation, show_translation] = useState(false);
 
@@ -59,6 +61,13 @@ const NewsCard = ({
 				{title && <p className='text-lg font-semibold'>{title}</p>}
 				<p className='text-sm md:text-base mt-1 md:mt-0 mb-2 whitespace-pre-wrap'>{text}</p>
 				<div className='flex flex-col mt-2'>
+					{notes && (
+						<div className='flex flex-row gap-1 text-foreground/80 mt-1 items-center text-sm'>
+							<p className='font-semibold'>NOTE:</p>
+							<p>{notes}</p>
+						</div>
+					)}
+
 					{media && media.length > 0 && (
 						<div className='flex flex-row gap-1 text-accent-foreground mt-1 items-center'>
 							<svg
@@ -76,6 +85,7 @@ const NewsCard = ({
 							<p className='text-xs whitespace-pre-wrap'>{media.length} piece of media attached</p>
 						</div>
 					)}
+
 					{original_language && (
 						<p className='text-sm text-accent-foreground cursor-pointer hover:text-accent'>
 							<button className='cursor-pointer' onClick={() => show_translation(!showing_translation)}>

@@ -38,7 +38,7 @@ export async function GET(request: Request) {
           WHERE timestamp >= (EXTRACT(EPOCH FROM NOW()) * 1000 - 24 * 3600 * 1000)
         ),
         latest_news AS (
-          SELECT id, title, text, timestamp, source, media, region, tags FROM news_items
+          SELECT id, title, text, timestamp, source, media, region, tags, original_language, original_text, notes FROM news_items
           ORDER BY timestamp DESC
           LIMIT $1 OFFSET $2
         )

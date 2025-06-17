@@ -10,11 +10,11 @@ const client = new Client({
 
 client.connect();
 
-export async function insert_news_item(item: { source: string | number | null; timestamp: number; message_id: string; text: string; title?: string | null; original_text?: string | null; original_language?: string | null; tags: string[]; region: string[]; media: string[] }) {
+export async function insert_news_item(item: { source: string | number | null; timestamp: number; message_id: string; text: string; title?: string | null; original_text?: string | null; original_language?: string | null; tags: string[]; region: string[]; media: string[], notes?: string }) {
     try {
         const query = `
-            INSERT INTO news_items(source, timestamp, message_id, text, title, original_text, original_language, tags, region, media)
-            VALUES($1, $2, $3, $4, $5, $6, $7, $8::text[], $9::text[], $10::jsonb)
+            INSERT INTO news_items(source, timestamp, message_id, text, title, original_text, original_language, tags, region, media, notes)
+            VALUES($1, $2, $3, $4, $5, $6, $7, $8::text[], $9::text[], $10::jsonb, $11)
             ON CONFLICT (message_id) DO NOTHING;
         `;
         const values = [
@@ -28,6 +28,7 @@ export async function insert_news_item(item: { source: string | number | null; t
             item.tags,
             item.region,
             JSON.stringify(item.media),
+            item.notes || null
         ];
         await client.query(query, values);
     } catch (error) {
