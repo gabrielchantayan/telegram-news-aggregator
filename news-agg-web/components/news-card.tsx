@@ -2,6 +2,20 @@
 import { useState } from 'react';
 import { Badge } from './ui/badge';
 
+/**
+ * Renders a news card component displaying news item details.
+ * 
+ * @param {Object} props - The properties object.
+ * @param {string} props.source - The source of the news item.
+ * @param {string} [props.title] - The title of the news item, if available.
+ * @param {string} props.text - The main text of the news item.
+ * @param {string} [props.original_text] - The original text of the news item, if translated.
+ * @param {string} [props.original_language] - The original language of the news item, if translated.
+ * @param {string[]} [props.tags] - An array of tags associated with the news item.
+ * @param {number} props.timestamp - The timestamp of when the news item was published.
+ * @param {string[]} [props.media] - An array of media items related to the news item.
+ * @param {string[]} [props.region] - An array of regions associated with the news item.
+ */
 const NewsCard = ({
 	source,
 	title,
@@ -78,7 +92,7 @@ const NewsCard = ({
 							<svg
 								data-testid='geist-icon'
 								height='16'
-								stroke-linejoin='round'
+								strokeLinejoin='round'
 								viewBox='0 0 16 16'
 								width='16'>
 								<path

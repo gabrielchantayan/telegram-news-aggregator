@@ -1,8 +1,8 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
-import NewsCard from '@/components/news-card';
+import InfiniteNews from '@/components/InfiniteNews';
 import { Client } from 'pg';
-import { PG_HOST, PG_USER, PG_PASSWORD, PG_DATABASE } from '../config';
+import { PG_DATABASE, PG_HOST, PG_PASSWORD, PG_USER } from '../config';
 
 interface NewsItem {
 	source: string;
@@ -27,7 +27,7 @@ export default async function Home() {
 
 	try {
 		await client.connect();
-		const res = await client.query('SELECT * FROM news_items ORDER BY timestamp DESC');
+		const res = await client.query('SELECT * FROM news_items ORDER BY timestamp DESC LIMIT 25 OFFSET 0');
 		news = res.rows.map((row) => ({
 			source: row.source,
 			timestamp: Number(row.timestamp),
@@ -57,23 +57,7 @@ export default async function Home() {
 					{news.length} pieces of news
 				</p>
 			</div>
-			<div className='flex flex-col gap-8'>
-				{news.map((n, i) => (
-					<NewsCard
-						key={i}
-						source={n.source}
-						title={n.title}
-						text={n.text}
-						original_text={n.original_text}
-						original_language={n.original_language}
-						tags={n.tags}
-						timestamp={n.timestamp}
-						media={n.media}
-						region={n.region}
-					/>
-				))}
-			</div>
-			<div className='text-sm'>Load more</div>
+			<InfiniteNews initialNews={news} />
 		</div>
 	);
 }
