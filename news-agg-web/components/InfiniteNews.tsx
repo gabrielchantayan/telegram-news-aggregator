@@ -71,7 +71,7 @@ const InfiniteNews: React.FC<InfiniteNewsProps> = ({ initialNews }) => {
 	};
 
 	return (
-		<div className='flex flex-col gap-8'>
+		<div className='flex flex-col gap-16 md:gap-8'>
 			{items.map((n, i) => (
 				<NewsCard
 					key={i}

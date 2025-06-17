@@ -47,9 +47,9 @@ export default async function Home() {
 	}
 
 	return (
-		<div className='grid grid-rows-[auto_1fr_20px] items-start  min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-mono)]'>
-			<div className='max-w-120'>
-				<h1 className='text-3xl font-semibold'>OSINT News Aggregator</h1>
+		<div className='grid grid-rows-[auto_1fr_20px] items-start  min-h-screen p-8 pb-20 gap-16 md:p-20 font-[family-name:var(--font-geist-mono)]'>
+			<div className='max-w-[80vw] md:max-w-120'>
+				<h1 className='text-xl md:text-3xl font-semibold'>OSINT News Aggregator</h1>
 				<p>
 					A collection of news from various Telegraph channels, translated to English, tagged, then published in a feed.
 				</p>
