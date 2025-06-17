@@ -58,7 +58,8 @@ const InfiniteNews: React.FC<InfiniteNewsProps> = ({ initialNews }) => {
 		setLoading(true);
 		try {
 			const res = await fetch(`/api/news?page=${page + 1}&limit=25`);
-			const newItems: NewsItem[] = await res.json();
+			const data = await res.json();
+			const newItems: NewsItem[] = data.news || [];
 			setItems((prevItems) => [...prevItems, ...newItems]);
 			setPage((prevPage) => prevPage + 1);
 			setHasMore(newItems.length === 25);

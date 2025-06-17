@@ -40,8 +40,6 @@ export default async function Home() {
 			throw new Error(`HTTP error! status: ${res.status}`);
 		}
 		news_res = await res.json();
-
-		console.log(news_res);
 	} catch (err) {
 		console.error('Error fetching news:', err);
 	}
