@@ -107,7 +107,7 @@ const NewsCard = ({
 						</div>
 					)}
 					{region && (
-						<div className='flex flex-row gap-2 mt-2 items-center'>
+						<div className='flex flex-row flex-wrap gap-2 mt-2 items-center'>
 							<svg
 								data-testid='geist-icon'
 								height='16'
