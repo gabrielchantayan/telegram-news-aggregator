@@ -1,8 +1,7 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 import InfiniteNews from '@/components/InfiniteNews';
-import { Client } from 'pg';
-import { PG_DATABASE, PG_HOST, PG_PASSWORD, PG_USER } from '../config';
+import { headers } from 'next/headers';
 
 interface NewsItem {
 	source: string;
@@ -16,34 +15,35 @@ interface NewsItem {
 	region?: string[];
 }
 
+interface NewsApiResponse {
+  items_total: number;
+  items_past_hour: number;
+  items_past_day: number;
+  news: NewsItem[];
+}
+
 export default async function Home() {
-	let news: NewsItem[] = [];
-	const client = new Client({
-		host: PG_HOST,
-		user: PG_USER,
-		password: PG_PASSWORD,
-		database: PG_DATABASE,
-	});
+	let news_res: NewsApiResponse = {
+		items_total: 0,
+		items_past_hour: 0,
+		items_past_day: 0,
+		news: []
+	};
 
 	try {
-		await client.connect();
-		const res = await client.query('SELECT * FROM news_items ORDER BY timestamp DESC LIMIT 25 OFFSET 0');
-		news = res.rows.map((row) => ({
-			source: row.source,
-			timestamp: Number(row.timestamp),
-			message_id: row.message_id,
-			text: row.text,
-			title: row.title,
-			original_text: row.original_text,
-			original_language: row.original_language,
-			tags: row.tags,
-			region: row.region,
-			media: row.media,
-		}));
+		const headersList = await headers();
+		const host = headersList.get('host');
+		const protocol = process.env.NODE_ENV === 'development' ? 'http://' : 'https://';
+		const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `${protocol}${host}`;
+		const res = await fetch(`${baseUrl}/api/news`);
+		if (!res.ok) {
+			throw new Error(`HTTP error! status: ${res.status}`);
+		}
+		news_res = await res.json();
+
+		console.log(news_res);
 	} catch (err) {
 		console.error('Error fetching news:', err);
-	} finally {
-		await client.end();
 	}
 
 	return (
@@ -53,11 +53,11 @@ export default async function Home() {
 				<p>
 					A collection of news from various Telegraph channels, translated to English, tagged, then published in a feed.
 				</p>
-				<p className='mt-4'>
-					{news.length} pieces of news
-				</p>
+				<p className='mt-4'>{news_res.items_total} pieces of news</p>
+				<p className='text-sm'>{news_res.items_past_hour} in the past hour</p>
+				<p className='text-sm'>{news_res.items_past_day} in the past 24 hours</p>
 			</div>
-			<InfiniteNews initialNews={news} />
+			<InfiniteNews initialNews={news_res.news} />
 		</div>
 	);
 }

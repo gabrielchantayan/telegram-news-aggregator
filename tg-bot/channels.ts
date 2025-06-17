@@ -67,7 +67,21 @@ const channels = [
 			'Artsakh War',
 		],
 	},
-	{ id: '1448634950', title: 'Ararat', username: 'ararathau', language: 'Russian' },
+	{
+		id: '1448634950',
+		title: 'Ararat',
+		username: 'ararathau',
+		language: 'Russian',
+		typical_topics: [
+			'Isreal-Iran War',
+			'Armenian Military',
+			'Armenian Internal Politics',
+			'Armenian Foreign Relations',
+			'Armenian Diplomacy',
+			'Azerbaijani Aggression',
+			'Artsakh War',
+		],
+	},
 	{
 		id: '1299040538',
 		title: 'Re:public of Artsakh',

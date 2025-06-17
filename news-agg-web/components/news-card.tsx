@@ -57,7 +57,7 @@ const NewsCard = ({
 			<div className='flex flex-col w-[80vw] md:w-150'>
 				<p className='text-sm text-accent'>{source}</p>
 				{title && <p className='text-lg font-semibold'>{title}</p>}
-				<p className='text mt-1 md:mt-0 mb-2 whitespace-pre-wrap'>{text}</p>
+				<p className='text-sm md:text-base mt-1 md:mt-0 mb-2 whitespace-pre-wrap'>{text}</p>
 				<div className='flex flex-col mt-2'>
 					{media && media.length > 0 && (
 						<div className='flex flex-row gap-1 text-accent-foreground mt-1 items-center'>
@@ -111,7 +111,7 @@ const NewsCard = ({
 							<svg
 								data-testid='geist-icon'
 								height='16'
-								stroke-linejoin='round'
+								strokeLinejoin='round'
 								viewBox='0 0 16 16'
 								width='16'>
 								<path

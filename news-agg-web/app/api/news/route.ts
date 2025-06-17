@@ -7,14 +7,6 @@ import {
   PG_DATABASE,
 } from '../../../config';
 
-interface NewsItem {
-  id: string;
-  title: string;
-  content: string;
-  timestamp: string;
-  source: string;
-  url: string;
-}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -31,13 +23,41 @@ export async function GET(request: Request) {
 
   try {
     await client.connect();
+
     const query = `
-      SELECT * FROM news_items
-      ORDER BY timestamp DESC
-      LIMIT $1 OFFSET $2
+      WITH
+        total_count AS (
+          SELECT COUNT(*) AS count FROM news_items
+        ),
+        past_hour_count AS (
+          SELECT COUNT(*) AS count FROM news_items
+          WHERE timestamp >= (EXTRACT(EPOCH FROM NOW()) * 1000 - 3600 * 1000)
+        ),
+        past_day_count AS (
+          SELECT COUNT(*) AS count FROM news_items
+          WHERE timestamp >= (EXTRACT(EPOCH FROM NOW()) * 1000 - 24 * 3600 * 1000)
+        ),
+        latest_news AS (
+          SELECT id, title, text, timestamp, source, media, region, tags FROM news_items
+          ORDER BY timestamp DESC
+          LIMIT $1 OFFSET $2
+        )
+      SELECT
+        (SELECT count FROM total_count) AS total,
+        (SELECT count FROM past_hour_count) AS past_hour_count,
+        (SELECT count FROM past_day_count) AS past_day_count,
+        (SELECT json_agg(latest_news.*) FROM latest_news) AS news;
     `;
+
     const { rows } = await client.query(query, [limit, offset]);
-    return NextResponse.json(rows as NewsItem[]);
+    const result = rows[0];
+
+    return NextResponse.json({
+		items_total: parseInt(result.total, 10),
+		items_past_hour: parseInt(result.past_hour_count, 10),
+		items_past_day: parseInt(result.past_day_count, 10),
+		news: result.news || [],
+	});
   } catch (error) {
     console.error('Error fetching news items:', error);
     return NextResponse.json({ error: 'Failed to fetch news items' }, { status: 500 });
