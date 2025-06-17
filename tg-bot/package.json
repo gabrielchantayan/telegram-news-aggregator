@@ -12,7 +12,7 @@
 	},
 	"scripts": {
 		"dev": "nodemon -r dotenv/config -r tsconfig-paths/register server.ts dotenv_config_path=./.env.dev -e ts",
-		"start": "ts-node -r tsconfig-paths/register server.ts dotenv_config_path=./.env -p 2221"
+		"start": "ts-node -r tsconfig-paths/register server.ts dotenv_config_path=./.env -p 3401"
 	},
 	"devDependencies": {
 		"@types/node": "^24.0.3",

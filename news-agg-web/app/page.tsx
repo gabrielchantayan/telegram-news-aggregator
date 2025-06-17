@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 import NewsCard from '@/components/news-card';
 import { Client } from 'pg';
 import { PG_HOST, PG_USER, PG_PASSWORD, PG_DATABASE } from '../config';

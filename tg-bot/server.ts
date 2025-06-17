@@ -162,26 +162,6 @@ const stringSession = new StringSession(TELEGRAM_STRING_SESSION);
 				osint_data.media = media_files;
 			}
 
-			let existing_data: any[] = []; // Initialize an array to hold existing data from output.json.
-			try {
-				// Attempt to read the content of 'output.json'.
-				const file_content = await fs.readFile('output.json', 'utf-8');
-				// Parse the JSON content into the existing_data array.
-				existing_data = JSON.parse(file_content);
-				// If the parsed content is not an array, reset it to an empty array to prevent errors.
-				if (!Array.isArray(existing_data)) {
-					existing_data = []; // Reset if not an array.
-				}
-			} catch (error: any) {
-				// Handle file not found error specifically.
-				if (error.code === 'ENOENT') {
-					console.log('output.json not found, creating new file.'); // Inform that the file will be created.
-				} else {
-					// Log any other errors encountered during file reading or parsing.
-					console.error('Error reading or parsing output.json:', error);
-				}
-			}
-
 			// If the original language is English, remove the original_language and original_text fields as they are redundant.
 			if (osint_data.original_language === 'English') {
 				delete osint_data.original_language; // Remove the original_language field.
@@ -191,10 +171,10 @@ const stringSession = new StringSession(TELEGRAM_STRING_SESSION);
 				}
 			}
 
-			// Log that OSINT data has been processed.
-			console.log('OSINT data appended to output.json');
 			// Insert the processed OSINT data into the database.
 			await insert_news_item(osint_data);
+			// Log that OSINT data has been processed.
+			console.log('Inserted news item to the database.');
 		}
 
 	}, new NewMessage({ chats: channels.map((c) => (c.username !== 'N/A' ? c.username : c.id)) })); // Register the event handler for new messages from specified channels.
