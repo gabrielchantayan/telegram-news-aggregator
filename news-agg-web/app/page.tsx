@@ -62,8 +62,7 @@ export default function Home() {
 			<div className='max-w-120'>
 				<h1 className='text-3xl font-semibold'>OSINT News Aggregator</h1>
 				<p>
-					This is a program to grab news from various Telegram channels, translate them to English, then
-					publish them in a feed.
+					A collection of news from various Telegraph channels, translated to English, tagged, then published in a feed.
 				</p>
 			</div>
 			<div className='flex flex-col gap-8'>

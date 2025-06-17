@@ -17,7 +17,7 @@ const NewsCard = ({
     text: string,
     original_text?: string,
     original_language?: string,
-    tags: string[],
+    tags?: string[],
     timestamp: number
 }) => {
 
@@ -52,11 +52,13 @@ const NewsCard = ({
 				{original_language && showing_translation && (
 					<p className='text-sm mt-1 text-accent-foreground whitespace-pre-wrap'>{original_text}</p>
 				)}
-				<div className='flex flex-row gap-2 mt-2'>
-					{tags.map((tag) => (
-						<Badge key={tag}>{tag}</Badge>
-					))}
-				</div>
+				{tags && (
+					<div className='flex flex-row gap-2 mt-2'>
+						{tags.map((tag) => (
+							<Badge key={tag}>{tag}</Badge>
+						))}
+					</div>
+				)}
 			</div>
 		</div>
 	);
