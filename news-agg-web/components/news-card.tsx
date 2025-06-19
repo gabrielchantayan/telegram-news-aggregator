@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { Badge } from './ui/badge';
+import Image from 'next/image';
 
 /**
  * Renders a news card component displaying news item details.
@@ -62,7 +63,7 @@ const NewsCard = ({
 				<p className='text-sm md:text-base mt-1 md:mt-0 mb-2 whitespace-pre-wrap'>{text}</p>
 				<div className='flex flex-col mt-2'>
 					{notes && (
-						<div className='flex flex-row gap-1 text-foreground/80 mt-1 items-center text-sm'>
+						<div className='flex flex-col md:flex-row gap-1 text-foreground/80 mt-1 items-start text-sm'>
 							<p className='font-semibold'>NOTE:</p>
 							<p>{notes}</p>
 						</div>
@@ -83,6 +84,33 @@ const NewsCard = ({
 									fill='currentColor'></path>
 							</svg>
 							<p className='text-xs whitespace-pre-wrap'>{media.length} piece of media attached</p>
+						</div>
+					)}
+
+					{media && (
+						<div className='flex flex-col items-center justify-center gap-4 mb-2'>
+							{media &&
+								media.map((id, index) => {
+									const url = `/api/media/${id}`;
+									return (
+										<div key={index} className='relative w-full h-auto'>
+											{id.endsWith('.mp4') || id.endsWith('.webm') || id.endsWith('.ogg') ? (
+												<p className='text-sm'>Video attachments not yet supported</p>
+											) : (
+												// <video controls src={url} className='max-w-full max-h-[80vh]' />
+												<Image
+													src={url}
+													alt={`Media ${index + 1}`}
+													layout='responsive'
+													width={500}
+													height={300}
+													objectFit='contain'
+													className='max-w-full max-h-[80vh] mt-2'
+												/>
+											)}
+										</div>
+									);
+								})}
 						</div>
 					)}
 
@@ -140,5 +168,6 @@ const NewsCard = ({
 		</div>
 	);
 };
+
 
 export default NewsCard;

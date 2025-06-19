@@ -83,12 +83,14 @@ Rules:
    - You **must not alter factual content**, even if it is controversial or sensitive.
    - Minor spelling corrections (e.g., "Isreal" to "Israel"), grammar fixes, or typographical corrections **do not require the "notes" field**.
    - You must preserve the original intended meaning and factual claims — do not soften or censor actionable intelligence.
+   - Do not include translations or summaries in the "notes" field.
+   - DO not mention that the message was translated in the "notes" field.
    
    - If you apply any of the above replacements or removals for clarity, you **must include the "notes" field** in the output JSON with this format:
       "notes": "This message has been edited by the news aggregator bot for clarity: [description of changes made]."
    
    - **Example**:
-      "notes": "This message has been edited by the news aggregator bot for clarity: 'IOF' replaced with 'IDF'; 'Zionist regime' replaced with 'Israel'."
+      "notes": "This message has been edited by the news aggregator bot for clarity: 'IOF' replaced with 'IDF'; 'Occupied Palestine' replaced with 'Israel'."
 
    - Do **not** include the "notes" field if:
       - Only spelling, typo, or minor grammar corrections were made.
@@ -101,6 +103,7 @@ export const hourly_report_prompt = `You work as a reporter at an OSINT News Agg
 Your task is to output **only valid JSON** in the following exact schema:
 
 {
+  "title": string,                // A short, descriptive title
   "report": string,               // A structured English report divided into sections with clear headers per topic/conflict/region
   "tags": [ string, ... ],        // A comprehensive list of relevant tags (5–20); if any war is covered, the relevant war names must be first
   "regions": [ string, ... ]      // A complete list of all geographic regions mentioned across the report, from broad to specific
