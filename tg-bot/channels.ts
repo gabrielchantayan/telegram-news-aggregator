@@ -161,6 +161,71 @@ const channels = [
 		language: 'Turkish',
 		typical_topics: ['Turkish News', 'Turkish Politics', 'Middle East'],
 	},
+	{
+		id: '1209835753',
+		title: 'Operativ Məlumat Mərkəzi',
+		username: 'operativmm',
+		language: 'Azerbaijani',
+		typical_topics: [
+			'Azerbaijani Politics',
+			'Armenian Military',
+			'Azerbaijani Military',
+			'Azerbaijani Foreign Relations',
+		],
+		special_instructions:
+			"Disregard messages that cover the Iran-Isreal or the Isreal-Palestine war that don't explicitly mention Azerbaijan or an Azerbaijani figure. This channel supports a genocidal regime. Special care must be taken with it's news. If there is news regarding Armenians that paints them in a bad light, add a note describing this channel's Pro-Azerbaijan leanings and Azerbaijan's genocidal rhetoric.",
+	},
+	{
+		id: '1429317034',
+		title: 'Borneni Efektivi',
+		username: 'borbeni_efektivi',
+		language: 'Serbian',
+		typical_topics: ['Serbian News', 'European Politics'],
+		special_instructions:
+			"Disregard messages that cover the Iran-Isreal or the Isreal-Palestine war that don't explicitly mention a Balkan country or a Balkan figure. This channel might have a right-wing lean. If it does, add a note about the channel's right-wing bias.",
+	},
+	{
+		id: '1236996847',
+		title: 'Xəbər Azərbaycan',
+		username: 'Xebervar',
+		language: 'Azerbaijani',
+		typical_topics: [
+			'Azerbaijani Politics',
+			'Armenian Military',
+			'Azerbaijani Military',
+			'Azerbaijani Foreign Relations',
+		],
+		special_instructions:
+			"Disregard messages that cover the Iran-Isreal or the Isreal-Palestine war that don't explicitly mention Azerbaijan or an Azerbaijani figure. This channel supports a genocidal regime. Special care must be taken with it's news. If there is news regarding Armenians that paints them in a bad light, add a note describing this channel's Pro-Azerbaijan leanings and Azerbaijan's genocidal rhetoric.",
+	},
+	{
+		id: '1327639291',
+		title: 'Armenpress',
+		username: 'armenpress',
+		language: 'Russian',
+		typical_topics: [
+			'Armenian Military',
+			'Armenian Internal Politics',
+			'Armenian Foreign Relations',
+			'Armenian Diplomacy',
+			'Azerbaijani Aggression',
+			'Artsakh War',
+		],
+	},
+	{
+		id: '1261204283',
+		title: 'Novosti-Armeniya',
+		username: 'N/A',
+		language: 'Russian',
+		typical_topics: [
+			'Armenian Military',
+			'Armenian Internal Politics',
+			'Armenian Foreign Relations',
+			'Armenian Diplomacy',
+			'Azerbaijani Aggression',
+			'Artsakh War',
+		],
+	},
 ];
 
 export default channels;

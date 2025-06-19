@@ -1,6 +1,6 @@
 import { news_item_prompt } from "@/prompt";
 
-export const message = async  ( client, message, language, topics ) => {
+export const message = async  ( client, message, language, topics, special_instructions? ) => {
 
 	let generated_prompt = news_item_prompt;
 
@@ -10,6 +10,10 @@ export const message = async  ( client, message, language, topics ) => {
 
 	if (topics) {
 		generated_prompt += `\n\nThis channel typically covers the following topics: ${topics.join(', ')}\nThe message may or may not be about one of these topics. Use your best judgement.`;
+	}
+
+	if (special_instructions) {
+		generated_prompt += `\n\nYou have been given the following special instructions regarding the source of news: ${special_instructions}`;
 	}
 
     const response = await client.responses.create({

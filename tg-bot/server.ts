@@ -72,7 +72,7 @@ const stringSession = new StringSession(TELEGRAM_STRING_SESSION);
 			event.message.message
 		);
 		// Process the message content using OpenAI, passing the client, message text, channel language, and typical topics.
-		const openai_res = await message(openai_client, event.message.message, channel?.language || null, channel?.typical_topics || null);
+		const openai_res = await message(openai_client, event.message.message, channel?.language || null, channel?.typical_topics || null, channel?.special_instructions || null);
 
 		// If OpenAI returns a response and it contains text.
 		if (openai_res && openai_res.text) {
