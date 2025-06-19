@@ -86,9 +86,13 @@ Rules:
    - Do not include translations or summaries in the "notes" field.
    - DO not mention that the message was translated in the "notes" field.
    
-   - If you apply any of the above replacements or removals for clarity, you **must include the "notes" field** in the output JSON with this format:
-      "notes": "This message has been edited by the news aggregator bot for clarity: [description of changes made]."
-   
+   - If you apply any of the above clarity replacements (such as replacing euphemisms like 'IOF' to 'IDF' or 'Occupied Palestine' to 'Israel'), you must include the "notes" field describing these changes.
+
+   - However, do NOT include a 'notes' field for any of the following:
+      - Normal translation from another language to English.
+      - Acronym or term replacement as part of translation (e.g., 'КСИР' to 'IRGC', 'سقوط' to 'fell').
+      - Spelling, grammar, or metadata cleanup.
+
    - **Example**:
       "notes": "This message has been edited by the news aggregator bot for clarity: 'IOF' replaced with 'IDF'; 'Occupied Palestine' replaced with 'Israel'."
 
