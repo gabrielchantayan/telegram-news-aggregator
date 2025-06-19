@@ -8,7 +8,8 @@
 		"pg": "^8.16.0",
 		"telegram": "^2.26.22",
 		"tsconfig-paths": "^4.2.0",
-		"uuid": "^11.1.0"
+		"uuid": "^11.1.0",
+		"node-cron": "^3.0.3"
 	},
 	"scripts": {
 		"dev": "nodemon -r dotenv/config -r tsconfig-paths/register server.ts dotenv_config_path=./.env.dev -e ts",

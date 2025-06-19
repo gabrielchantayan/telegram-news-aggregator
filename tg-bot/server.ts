@@ -1,9 +1,9 @@
 import channels from '@/channels';
 import { CHATGPT_API_KEY, TELEGRAM_API_HASH, TELEGRAM_API_ID, TELEGRAM_STRING_SESSION } from '@/config';
 import { initializeB2, uploadFile } from '@/lib/backblaze';
-import { message } from '@/lib/openai-message';
 import { insert_news_item } from '@/lib/db';
-import fs from 'fs/promises';
+import { schedule_hourly_report_job } from '@/lib/jobs';
+import { message } from '@/lib/openai-message';
 import input from 'input';
 import OpenAI from 'openai';
 import { TelegramClient } from 'telegram';
@@ -39,6 +39,9 @@ const stringSession = new StringSession(TELEGRAM_STRING_SESSION);
 	});
 	// Log a success message once connected to Telegram.
 	console.log('You should now be connected.');
+
+	// Schedule the hourly report job
+	schedule_hourly_report_job(openai_client);
 
 	// get_channels(telegram_client); // This line is commented out, likely for future use or debugging.
 
