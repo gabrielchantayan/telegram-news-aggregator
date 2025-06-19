@@ -226,6 +226,83 @@ const channels = [
 			'Artsakh War',
 		],
 	},
+	{
+		id: '1462957310',
+		title: 'Yerevan․Today Rus',
+		username: 'rusyerevantoday',
+		language: 'Russian',
+		typical_topics: [
+			'Armenian Military',
+			'Armenian Internal Politics',
+			'Armenian Foreign Relations',
+			'Armenian Diplomacy',
+			'Azerbaijani Aggression',
+			'Artsakh War',
+		],
+	},
+
+	{
+		id: '1764399953',
+		title: 'Girl with a Gun',
+		username: 'leontinakoen',
+		language: 'Armenian, Russian',
+		typical_topics: [
+			'Armenian Military',
+			'Armenian Internal Politics',
+			'Armenian Foreign Relations',
+			'Armenian Diplomacy',
+			'Azerbaijani Aggression',
+			'Artsakh War',
+		],
+	},
+	{
+		id: '1231063061',
+		title: 'Oxu',
+		username: 'oxuaze',
+		language: 'Azerbaijani',
+		typical_topics: [
+			'Azerbaijani Politics',
+			'Armenian Military',
+			'Azerbaijani Military',
+			'Azerbaijani Foreign Relations',
+		],
+		special_instructions:
+			"Disregard messages that cover the Iran-Isreal or the Isreal-Palestine war that don't explicitly mention Azerbaijan or an Azerbaijani figure. This channel supports a genocidal regime. Special care must be taken with it's news. If there is news regarding Armenians that paints them in a bad light, add a note describing this channel's Pro-Azerbaijan leanings and Azerbaijan's genocidal rhetoric.",
+	},
+	{
+		id: '1288049982',
+		title: 'Musavat',
+		username: 'TVmusavat',
+		language: 'Azerbaijani',
+		typical_topics: [
+			'Azerbaijani Politics',
+			'Armenian Military',
+			'Azerbaijani Military',
+			'Azerbaijani Foreign Relations',
+		],
+		special_instructions:
+			"Disregard messages that cover the Iran-Isreal or the Isreal-Palestine war that don't explicitly mention Azerbaijan or an Azerbaijani figure. This channel supports a genocidal regime. Special care must be taken with it's news. If there is news regarding Armenians that paints them in a bad light, add a note describing this channel's Pro-Azerbaijan leanings and Azerbaijan's genocidal rhetoric.",
+	},
+
+	{
+		id: '1350013005',
+		title: 'Power from the East',
+		username: 'silasaistoka',
+		language: 'Serbian',
+		typical_topics: ['Serbian News', 'European Politics'],
+		special_instructions:
+			"Disregard messages that cover the Iran-Isreal or the Isreal-Palestine war that don't explicitly mention a Balkan country or a Balkan figure. This channel might have a right-wing lean. If it does, add a note about the channel's right-wing bias.",
+	},
+
+	{
+		id: '1635002934',
+		title: 'Army of the Republic of Serbia',
+		username: 'debeljaca1vrs',
+		language: 'Serbian',
+		typical_topics: ['Serbian News', 'European Politics'],
+		special_instructions:
+			"Disregard messages that cover the Iran-Isreal or the Isreal-Palestine war that don't explicitly mention a Balkan country or a Balkan figure. This channel might have a right-wing lean. If it does, add a note about the channel's right-wing bias.",
+	},
 ];
 
 export default channels;

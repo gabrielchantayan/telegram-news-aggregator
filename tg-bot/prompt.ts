@@ -100,6 +100,11 @@ Rules:
       - Only spelling, typo, or minor grammar corrections were made.
       - Only formatting clean-up (e.g., removing extra line breaks, Telegram handles) was performed.
 
+8. **Duplicate Filtering**
+  - You will be supplied with the previous 20 news items under the \`PREVIOUS_ITEMS\` JSON string.
+  - If the incoming news item matches exactly any of the \`PREVIOUS_ITEMS\`, output nothing at all.
+  - If the incoming news item contains new information, even if it's similar to a previous item, output the parsed JSON normally.
+
 `;
 
 export const hourly_report_prompt = `You work as a reporter at an OSINT News Aggregator. Every hour you are given a list of news items, and you are to write a structured summary report of them.
