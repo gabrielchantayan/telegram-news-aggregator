@@ -13,7 +13,7 @@ db.connect();
 export async function insert_hourly_report(report: { title: string; report_text: string; tags: string[]; regions: string[]; timestamp: Date }) {
     try {
         const query = `
-            INSERT INTO reports (title, report, tags, regions, timestamp)
+            INSERT INTO reports (title, report, tags, regions, created_at)
             VALUES($1, $2, $3::text[], $4::text[], $5);
         `;
         const values = [

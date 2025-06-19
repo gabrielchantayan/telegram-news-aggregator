@@ -1,27 +1,23 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
-import NewsCard from '@/components/news-card';
+import ReportCard from '@/components/report-card';
 
-interface NewsItem {
-	source: string;
-	title?: string;
-	text: string;
-	original_text?: string;
-	original_language?: string;
-	tags?: string[];
-	timestamp: number;
-	media?: string[];
-	region?: string[];
-	notes?: string
+export interface ReportItem {
+	id: number;
+	title: string;
+	report: string;
+	tags: string[];
+	regions: string[];
+	created_at: string; // ISO timestamp
 }
 
-interface InfiniteNewsProps {
-	initialNews: NewsItem[];
+interface InfiniteReportsProps {
+	initialReports: ReportItem[];
 }
 
-const InfiniteNews: React.FC<InfiniteNewsProps> = ({ initialNews }) => {
-	const [items, setItems] = useState<NewsItem[]>(initialNews);
+const InfiniteReports: React.FC<InfiniteReportsProps> = ({ initialReports }) => {
+	const [items, setItems] = useState<ReportItem[]>(initialReports);
 	const [page, setPage] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const [hasMore, setHasMore] = useState(true);
@@ -34,7 +30,7 @@ const InfiniteNews: React.FC<InfiniteNewsProps> = ({ initialNews }) => {
 			(entries) => {
 				const target = entries[0];
 				if (target.isIntersecting && hasMore && !loading) {
-					fetchMoreNews();
+					fetchMoreReports();
 				}
 			},
 			{
@@ -55,17 +51,17 @@ const InfiniteNews: React.FC<InfiniteNewsProps> = ({ initialNews }) => {
 		};
 	}, [hasMore, loading]);
 
-	const fetchMoreNews = async () => {
+	const fetchMoreReports = async () => {
 		setLoading(true);
 		try {
-			const res = await fetch(`/api/news?page=${page + 1}&limit=25`);
+			const res = await fetch(`/api/reports?page=${page + 1}&limit=25`);
 			const data = await res.json();
-			const newItems: NewsItem[] = data.news || [];
+			const newItems: ReportItem[] = data.reports || [];
 			setItems((prevItems) => [...prevItems, ...newItems]);
 			setPage((prevPage) => prevPage + 1);
 			setHasMore(newItems.length === 25);
 		} catch (error) {
-			console.error('Error fetching more news:', error);
+			console.error('Error fetching more reports:', error);
 			setHasMore(false); // Stop trying to load more on error
 		} finally {
 			setLoading(false);
@@ -74,19 +70,15 @@ const InfiniteNews: React.FC<InfiniteNewsProps> = ({ initialNews }) => {
 
 	return (
 		<div className='flex flex-col gap-16 md:gap-8'>
-			{items.map((n, i) => (
-				<NewsCard
+			{items.map((r, i) => (
+				<ReportCard
 					key={i}
-					source={n.source}
-					title={n.title}
-					text={n.text}
-					original_text={n.original_text}
-					original_language={n.original_language}
-					tags={n.tags}
-					timestamp={n.timestamp}
-					media={n.media}
-					region={n.region}
-					notes={n.notes}
+					id={r.id}
+					title={r.title}
+					report={r.report}
+					tags={r.tags}
+					regions={r.regions}
+					created_at={r.created_at}
 				/>
 			))}
 			{loading && <div className='text-center'>Loading...</div>}
@@ -95,4 +87,4 @@ const InfiniteNews: React.FC<InfiniteNewsProps> = ({ initialNews }) => {
 	);
 };
 
-export default InfiniteNews;
+export default InfiniteReports;

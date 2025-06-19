@@ -126,6 +126,41 @@ const channels = [
 		language: 'Russian',
 		typical_topics: ['China-Taiwan Conflict', 'Chinese Diplomacy', 'Chinese Foreign Relations', 'Chinese News'],
 	},
+	{
+		id: '1002400952',
+		title: 'Quds News Network',
+		username: 'QudsN',
+		language: 'Arabic',
+		typical_topics: [
+			'Isreal-Iran War',
+			'Palestinian Internal Politics',
+			'Palestinian Foreign Relations',
+			'Zionist attacks',
+			'Levantine News',
+			'Middle East',
+		],
+	},
+	{
+		id: '1002129373',
+		title: 'Al Mayadeen',
+		username: 'almayadeen',
+		language: 'Arabic',
+		typical_topics: [
+			'Isreal-Iran War',
+			'Palestinian Internal Politics',
+			'Palestinian Foreign Relations',
+			'Zionist attacks',
+			'Levantine News',
+			'Middle East',
+		],
+	},
+	{
+		id: '1497314205',
+		title: 'Solcu Gazete',
+		username: 'solcugazete',
+		language: 'Turkish',
+		typical_topics: ['Turkish News', 'Turkish Politics', 'Middle East'],
+	},
 ];
 
 export default channels;

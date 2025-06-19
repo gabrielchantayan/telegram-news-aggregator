@@ -15,7 +15,7 @@ export async function schedule_hourly_report_job(openai_client: OpenAI): Promise
 
             const { rows: news_items } = await db.query(
                 `SELECT * FROM news_items WHERE timestamp >= $1 AND timestamp <= $2`,
-                [start_of_previous_hour, end_of_previous_hour]
+                [start_of_previous_hour.getTime(), end_of_previous_hour.getTime()]
             );
 
             let report_text: string;
