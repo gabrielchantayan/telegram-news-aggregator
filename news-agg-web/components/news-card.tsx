@@ -95,7 +95,7 @@ const NewsCard = ({
 									return (
 										<div key={index} className='relative w-full h-auto'>
 											{id.endsWith('.mp4') || id.endsWith('.webm') || id.endsWith('.ogg') ? (
-												<p className='text-sm'>Video attachments not yet supported</p>
+												<video controls src={url} className="max-w-full max-h-[80vh] mt-2" />
 											) : (
 												// <video controls src={url} className='max-w-full max-h-[80vh]' />
 												<Image

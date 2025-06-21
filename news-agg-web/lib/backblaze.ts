@@ -3,7 +3,7 @@ import {
 	BACKBLAZE_BUCKET_NAME,
 	BACKBLAZE_KEY_ID,
 	BACKBLAZE_APPLICATION_KEY
-} from '../config';
+} from '@/config';
 
 const b2 = new B2({
 	applicationKeyId: BACKBLAZE_KEY_ID,
@@ -32,17 +32,32 @@ export const initializeB2 = async () => {
 	}
 };
 
-export const downloadFile = async (fileName: string) => {
+export interface DownloadFileByNameOptions {
+	bucketName: string;
+	fileName: string;
+	responseType: 'arraybuffer';
+	range?: string;
+}
+
+export const downloadFile = async (fileName: string, range?: string) => {
 	if (!cachedBucketId) {
 		await initializeB2();
 	}
 
-	const {
-		data
-	} = await b2.downloadFileByName({
+	const options: DownloadFileByNameOptions = {
 		bucketName: BACKBLAZE_BUCKET_NAME,
 		fileName,
 		responseType: 'arraybuffer'
-	});
-	return Buffer.from(data);
+	};
+
+	if (range) {
+		options.range = range;
+	}
+
+	const { data, headers } = await b2.downloadFileByName(options);
+	return {
+		buffer: Buffer.from(data),
+		contentLength: headers['content-length'],
+		contentType: headers['content-type']
+	};
 };
