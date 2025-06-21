@@ -228,7 +228,7 @@ const channels = [
 	},
 	{
 		id: '1462957310',
-		title: 'Yerevan․Today Rus',
+		title: 'Yerevan Today',
 		username: 'rusyerevantoday',
 		language: 'Russian',
 		typical_topics: [
@@ -302,6 +302,54 @@ const channels = [
 		typical_topics: ['Serbian News', 'European Politics'],
 		special_instructions:
 			"Disregard messages that cover the Iran-Isreal or the Isreal-Palestine war that don't explicitly mention a Balkan country or a Balkan figure. This channel might have a right-wing lean. If it does, add a note about the channel's right-wing bias.",
+	},
+
+	{
+		id: '1427018545',
+		title: 'National Observatory of the Far Right',
+		username: 'ONextremeDroite',
+		language: 'French',
+		typical_topics: ['French News', 'European Politics'],
+		special_instructions:
+			"Disregard messages that cover the Iran-Isreal or the Isreal-Palestine war that don't explicitly mention France country or a French figure.",
+	},
+
+	{
+		id: '1343958429',
+		title: 'Ministry of Foreign Affairs of the Republic of Armenia',
+		username: 'MFAofArmenia',
+		language: 'Armenian',
+		typical_topics: [
+			'Armenian Military',
+			'Armenian Internal Politics',
+			'Armenian Foreign Relations',
+			'Armenian Diplomacy',
+			'Azerbaijani Aggression',
+			'Artsakh War',
+		],
+	},
+	{
+		id: '1158493000',
+		title: 'Ministry of Defence of the Republic of Armenia',
+		username: 'mil_armenia',
+		language: 'Armenian',
+		typical_topics: [
+			'Armenian Military',
+			'Armenian Internal Politics',
+			'Armenian Foreign Relations',
+			'Armenian Diplomacy',
+			'Azerbaijani Aggression',
+			'Artsakh War',
+		],
+	},
+	{
+		id: '1829562643',
+		title: 'Le fil d’IO',
+		username: 'ioRetraites',
+		language: 'French',
+		typical_topics: ['French News', 'European Politics'],
+		special_instructions:
+			"Disregard messages that cover the Iran-Isreal or the Isreal-Palestine war that don't explicitly mention France country or a French figure.",
 	},
 ];
 

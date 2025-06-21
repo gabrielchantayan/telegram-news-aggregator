@@ -10,6 +10,7 @@ import { TelegramClient } from 'telegram';
 import { NewMessage } from 'telegram/events';
 import { StringSession } from 'telegram/sessions';
 import { v4 as uuidv4 } from 'uuid';
+import { get_channels } from './lib/get-channels';
 
 // Define the Telegram API ID, retrieved from configuration.
 const apiId = TELEGRAM_API_ID;
@@ -43,7 +44,7 @@ const stringSession = new StringSession(TELEGRAM_STRING_SESSION);
 	// Schedule the hourly report job
 	schedule_hourly_report_job(openai_client);
 
-	// get_channels(telegram_client);
+	get_channels(telegram_client);
 
 	// console.log(telegram_client.session.save()); // This line is commented out, likely for debugging session saving.
 

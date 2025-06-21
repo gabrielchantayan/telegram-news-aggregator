@@ -28,7 +28,25 @@ export async function schedule_hourly_report_job(openai_client: OpenAI): Promise
                 title = 'The past hour has been calm...';
             } else {
                 const news_block = news_items.map((item: any) => `Title: ${item.title}\nSummary: ${item.summary}`).join('\n\n');
-                const prompt = `${hourly_report_prompt}\n\n${news_block}`;
+
+                const reports_to_grab = 8;
+                const { rows: past_reports } = await db.query(
+					'SELECT timestamp, report_text FROM hourly_reports ORDER BY timestamp ASC LIMIT $1',
+					[reports_to_grab]
+				);
+
+                const past_reports_block = past_reports
+                  .map((r: any) => `## Timestamp: ${new Date(r.timestamp).toISOString()}
+Report: ${r.report_text}`)
+                  .join('\n\n');
+
+                const prompt = `${hourly_report_prompt}
+
+# Past Hourly Reports:
+${past_reports_block}
+
+# Current Hour News Items:
+${news_block}`;
                 const openai_response = await openai_client.chat.completions.create({
                     model: "gpt-4o",
                     messages: [{ role: "user", content: prompt }],
